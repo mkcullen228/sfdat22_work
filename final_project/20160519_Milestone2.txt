@@ -1,0 +1,30 @@
+Expedia Hotel Recommendations - A Kaggle Competition
+Maura Cullen
+GA Data Science. Final Project Milestone 2
+2016-05-19
+
+Overview
+My project came from a Kaggle competition from Expedia, the travel booking site.  Expedia provided data based on customer behavior on the site. This includes what the customer searched for (destination, check in date, number of people etc.) and how they interacted with the site (number of clicks, if the person booked etc). 
+The goal of the competition is to predict which hotel group (or cluster) a user is going to book based on the current search and other information from the site visit.  Expedia already has the hotels clustered by in-house algorithm based on past data. 
+
+Data and Code 
+https://www.kaggle.com/c/expedia-hotel-recommendations
+https://github.com/mkcullen228/sfdat22_work/tree/master/final_project
+Dataset: final_projects/data/test.csv, destinations.csv (only using test.csv as of now).
+Python Script: expedia_prediction_script (currently only loads small portion of data for speed).
+
+Summary of Progress and Thoughts
+Honestly, I am not as far into this project as I would like to be at this point. But I have started a few things that gave me some insight into what I plan to do going forward. 
+When I started this project I understood the project to be very simple. There is data from the site and I will try to classify which hotel cluster they will choose. I will try to predict it that way.  However, as I looked and thought about the data more I realized that I want to try to break up the problem into two parts. 
+First, I want to try to predict if a person will book - not just click. There is a column called is_booking in the dataset that will be my target for this classification. One issue I have seen with this classification so far is that there is a very uneven distribution of the data - there are many more clicks and few actual bookings.  Therefore, predicting that a user never books (is_booking = 0 always), actually yields a low error- even if that is not true. 
+Second, I want to try classify which hotel cluster the user chooses. This part will only be trained on data where is_booking = 1.  For this part I am assuming that I know the person will book. My thinking is that only the data when people book to learn what they will book.  When a user is searching and not booking may confuse the system with too much noise. For this part I do believe I will need to add features that encompass some of the click (not book) data because it might be interesting and useful to determining the booking choice.  Still need to do that. 
+So far, I have tried to implement a knn (k = 3) and logistic regression search for both of these parts of the problem.  I have only tested on a small set of the data for speed just to test that the code syntax is correct.  Still a lot of work to be done on the model search effort. 
+
+Next Steps
+Add additional features that will hopefully be predictive (thoughts listed in code at bottom). Such as: is_family, weekend, etc.
+Clean up some columns in dataset so that I can use them. I.e. Time column, check in dates, etc. 
+Incorporate destinations.csv. This csv is provided by Kaggle and contains features derived from review of hotel text. 
+Improve knn classification by using grid search to find best k value. 
+Add additional types of classification models for predicting both booking and which cluster the person will book. 
+Test results on test.csv dataset provided. 
+Recommendation system? Add some version of dot product feature to help with the clusters. 
